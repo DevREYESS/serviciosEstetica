@@ -1,5 +1,9 @@
 package com.reyes.estetica.repository;
 
-public class CitaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.reyes.estetica.model.Cita;
+
+public interface CitaRepository extends JpaRepository<Cita, Long> {
     
 }

@@ -1,21 +1,27 @@
 package com.reyes.estetica.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
     
     @Id
-    private long Id;
+    private Long IdUser;
     private String nombre;
     private String apPat;
     private String apMat;
     private String email;
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private List<Cita> citas;
+
     public long getId() {
-        return Id;
+        return IdUser;
     }
 
     public String getNombre(){
@@ -39,7 +45,7 @@ public class User {
     }
 
     public void setId(long id) {
-        Id = id;
+        IdUser = id;
     }
 
     public void setNombre(String nom){
