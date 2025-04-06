@@ -1,0 +1,119 @@
+gestiona-citas-backend/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── com/
+│   │   │   │   ├── estetica/
+│   │   │   │   │   ├── gestionacitas/
+│   │   │   │   │   │   ├── config/                # Configuración general (como seguridad, mail, etc.)
+│   │   │   │   │   │   │   ├── SecurityConfig.java # Configuración de seguridad (Spring Security)
+│   │   │   │   │   │   │   └── MailConfig.java     # Configuración de envío de correos
+│   │   │   │   │   │   ├── controller/            # Controladores REST (manejadores de las rutas)
+│   │   │   │   │   │   │   ├── UserController.java  # Controlador de usuarios
+│   │   │   │   │   │   │   ├── AppointmentController.java # Controlador de citas
+│   │   │   │   │   │   │   └── ServiceController.java   # Controlador de servicios (peinados, cortes)
+│   │   │   │   │   │   ├── model/                 # Clases de entidad (representación de tablas en la DB)
+│   │   │   │   │   │   │   ├── User.java           # Entidad Usuario
+│   │   │   │   │   │   │   ├── Appointment.java     # Entidad Cita
+│   │   │   │   │   │   │   └── Service.java         # Entidad Servicio
+│   │   │   │   │   │   ├── repository/            # Interfaces para interactuar con la base de datos
+│   │   │   │   │   │   │   ├── UserRepository.java  # Repositorio para Usuarios
+│   │   │   │   │   │   │   ├── AppointmentRepository.java # Repositorio para Citas
+│   │   │   │   │   │   │   └── ServiceRepository.java # Repositorio para Servicios
+│   │   │   │   │   │   ├── service/               # Lógica de negocio
+│   │   │   │   │   │   │   ├── UserService.java    # Servicio para Usuarios
+│   │   │   │   │   │   │   ├── AppointmentService.java # Servicio para Citas
+│   │   │   │   │   │   │   └── ServiceService.java # Servicio para Servicios
+│   │   │   │   │   │   ├── exception/             # Manejo de excepciones personalizadas
+│   │   │   │   │   │   │   ├── ResourceNotFoundException.java  # Excepción para recursos no encontrados
+│   │   │   │   │   │   │   └── InvalidInputException.java      # Excepción para entradas inválidas
+│   │   │   │   │   │   ├── dto/                   # Clases DTO (Data Transfer Objects) para la transferencia de datos
+│   │   │   │   │   │   │   ├── UserDTO.java       # DTO de Usuario
+│   │   │   │   │   │   │   ├── AppointmentDTO.java # DTO de Cita
+│   │   │   │   │   │   │   └── ServiceDTO.java     # DTO de Servicio
+│   │   │   │   │   │   └── GestionaCitasApplication.java # Clase principal para iniciar la aplicación
+│   │   ├── resources/
+│   │   │   ├── application.properties              # Configuración de la aplicación (base de datos, puertos, etc.)
+│   │   │   └── static/                            # Archivos estáticos (si los necesitas)
+│   └── test/
+│       ├── java/
+│       │   └── com/
+│       │       └── estetica/
+│       │           └── gestionacitas/
+│       │               ├── controller/            # Pruebas de controladores
+│       │               ├── service/               # Pruebas de servicios
+│       │               └── repository/            # Pruebas de repositorios
+└── pom.xml                                           # Archivo de configuración de Maven (dependencias, plugins)
+
+
+
+Explicación de las Carpetas y Archivos:
+config/:
+
+SecurityConfig.java: Configuración de Spring Security para la gestión de usuarios, roles, autenticación y autorización.
+
+MailConfig.java: Configuración de JavaMailSender para el envío de correos de confirmación.
+
+controller/:
+
+UserController.java: Controlador que maneja las solicitudes relacionadas con los usuarios (registro, inicio de sesión).
+
+AppointmentController.java: Controlador que gestiona las citas (crear, ver, modificar, cancelar).
+
+ServiceController.java: Controlador que maneja los servicios disponibles en la estética (peinados, cortes, etc.).
+
+model/:
+
+User.java: Clase que representa la entidad Usuario en la base de datos.
+
+Appointment.java: Clase que representa la entidad Cita en la base de datos.
+
+Service.java: Clase que representa los servicios de estética disponibles.
+
+repository/:
+
+UserRepository.java: Repositorio para la entidad Usuario, que permite interactuar con la base de datos.
+
+AppointmentRepository.java: Repositorio para la entidad Cita.
+
+ServiceRepository.java: Repositorio para la entidad Service.
+
+service/:
+
+UserService.java: Lógica de negocio para los usuarios (registro, login).
+
+AppointmentService.java: Lógica de negocio para las citas (crear, modificar, cancelar).
+
+ServiceService.java: Lógica de negocio para los servicios (consultar servicios disponibles).
+
+exception/:
+
+ResourceNotFoundException.java: Excepción personalizada que se lanza cuando un recurso no se encuentra (por ejemplo, un usuario o cita).
+
+InvalidInputException.java: Excepción personalizada para entradas inválidas de los usuarios.
+
+dto/:
+
+UserDTO.java: DTO que contiene los datos de usuario que se envían al cliente (sin información sensible como contraseñas).
+
+AppointmentDTO.java: DTO con los datos de la cita.
+
+ServiceDTO.java: DTO con los datos de los servicios disponibles.
+
+GestionaCitasApplication.java: Clase principal donde arranca la aplicación Spring Boot.
+
+Flujo de Trabajo Básico:
+El Controlador recibe las solicitudes HTTP y las pasa al Servicio correspondiente.
+
+El Servicio realiza la lógica de negocio necesaria y accede a los Repositorios para obtener o modificar los datos en la base de datos.
+
+Los Modelos representan las entidades que se almacenan en la base de datos (por ejemplo, User, Appointment, Service).
+
+Los DTOs son usados para transferir datos entre las capas y a través de la red, evitando exponer directamente las entidades de base de datos.
+
+En caso de errores, las Excepciones personalizadas se gestionan y se responden al cliente con mensajes adecuados.
+
+¿Cómo seguir adelante?
+Pruebas unitarias y de integración: Utiliza la carpeta test/ para agregar pruebas automatizadas para cada capa del proyecto (controladores, servicios, repositorios).
+
+Seguridad: Configura roles y permisos en SecurityConfig.java para gestionar la autenticación y autorización de usuarios y administradores.
